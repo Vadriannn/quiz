@@ -13,11 +13,12 @@ class PegawaiSeeder extends Seeder
      */
     public function run(): void
     {
-        $dataku = 
-        [
-            ['nama' => 'David', 'email' => 'david@gmail.com', 'notelp' => '085158883003'],
-            ['nama' => 'Jeremy', 'email' => 'jeremy@gmail.com', 'notelp' => '082142903507'],
-            ['nama' => 'Vern', 'email' => 'vern@gmail.com', 'notelp' => '085121802250'],
+        $dataku = [
+            ['nama' => 'Vadrian', 'email' => 'vadrian@gmail.com', 'password' => bcrypt('password'), 'notelp' => '082122846448', 'Role' => 'Admin'],
+            ['nama' => 'David', 'email' => 'david@gmail.com', 'password' => bcrypt('password'), 'notelp' => '085158883003', 'Role' => 'User'],
+            ['nama' => 'Jeremy', 'email' => 'jeremy@gmail.com', 'password' => bcrypt('password'), 'notelp' => '082142903507', 'Role' => 'User'],
+            ['nama' => 'Vern', 'email' => 'vern@gmail.com', 'password' => bcrypt('password'), 'notelp' => '085121802250', 'Role' => 'User'],
+            
         ];
 
         DB::table('pegawais')->insert($dataku);

@@ -15,7 +15,9 @@ return new class extends Migration
             $table->integer('id')->autoIncrement();
             $table->string('nama', 100)->nullable();
             $table->string('email', 100)->nullable();
+            $table->string('password', 100)->nullable();
             $table->string('notelp', 15)->nullable();
+            $table->enum('Role', ['Admin', 'User'])->default('User');
             $table->timestamps();
         });
     }

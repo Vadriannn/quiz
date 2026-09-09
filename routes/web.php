@@ -19,7 +19,6 @@ Route::delete('/hapus-kategori/{kategori}', [KategoriController::class, 'hapus']
 Route::get('/ubah-kategori/{kategori}', [KategoriController::class, 'ubah'])->name('kategori.ubah');
 Route::put('/update-kategori/{kategori}', [KategoriController::class, 'update'])->name('kategori.update');
 
-
-Route::get('/horeee-saya-bisa', function (){
-    return 'Ini adalah halaman saya';
+Route::get('/', function () {
+    return view('dashboard');
 });
