@@ -7,15 +7,25 @@ use Illuminate\Support\Facades\DB;
 
 class BarangController extends Controller
 {
-    public function tampil()
+    public function tampil(Request $request)
     {
-        $barangs = DB::table('barangs')
+        $cari = $request->get('cari') ?? $request->get('q');
+
+        $query = DB::table('barangs')
             ->leftJoin('kategoris', 'barangs.kategori_id', '=', 'kategoris.id')
             ->select('barangs.*', 'kategoris.nama as nama_kategori')
-            ->orderBy('barangs.id', 'desc')
-            ->get();
+            ->orderBy('barangs.id', 'desc');
 
-        return view('barang.daftar', ['barangs' => $barangs]);
+        if ($cari) {
+            $query->where(function ($q) use ($cari) {
+                $q->where('barangs.nama', 'like', "%{$cari}%")
+                  ->orWhere('kategoris.nama', 'like', "%{$cari}%");
+            });
+        }
+
+        $barangs = $query->get();
+
+        return view('barang.daftar', ['barangs' => $barangs, 'cari' => $cari]);
     }
 
     public function create()

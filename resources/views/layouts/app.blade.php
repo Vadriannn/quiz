@@ -27,7 +27,7 @@
         <script defer="defer" src="{{ asset('adminator/vendor-fullcalendar.js') }}"></script>
         <script defer="defer" src="{{ asset('adminator/vendor-chartjs.js') }}"></script>
         <script defer="defer" src="{{ asset('adminator/vendors.js') }}"></script>
-        <script defer="defer" src="{{ asset('adminator/2026.js') }}"></script>
+        <script defer="defer" src="{{ asset('adminator/2026.js') }}?v={{ file_exists(public_path('adminator/2026.js')) ? filemtime(public_path('adminator/2026.js')) : time() }}"></script>
         <link href="{{ asset('adminator/style.css') }}" rel="stylesheet" />
     </head>
     <body 

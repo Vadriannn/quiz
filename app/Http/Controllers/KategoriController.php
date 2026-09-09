@@ -8,11 +8,18 @@ use App\Models\Kategori;
 
 class KategoriController extends Controller
 {
-    public function tampil()
+    public function tampil(Request $request)
     {
-        // $kategoris = DB::table('kategoris')->get();
-        $kategoris = Kategori::all();
-        return view('kategori.daftar', ['kategoris' => $kategoris]);
+        $cari = $request->get('cari') ?? $request->get('q');
+        $query = Kategori::query();
+
+        if ($cari) {
+            $query->where('nama', 'like', "%{$cari}%")
+                  ->orWhere('deskripsi', 'like', "%{$cari}%");
+        }
+
+        $kategoris = $query->orderBy('id', 'desc')->get();
+        return view('kategori.daftar', ['kategoris' => $kategoris, 'cari' => $cari]);
     }
 
     public function create()

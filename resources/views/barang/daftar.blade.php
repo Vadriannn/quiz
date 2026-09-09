@@ -39,11 +39,24 @@
 
 <div class="grid">
     <section class="col-12 card">
-        <div class="card-head">
+        <div class="card-head" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
             <div class="card-title-wrap">
                 <h2 class="card-title">Semua Barang & Kategori</h2>
             </div>
-            <span class="badge primary">{{ count($barangs) }} BARANG</span>
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <form method="GET" action="{{ route('daftar-barang') }}" style="margin: 0;">
+                    <div class="input-icon" style="width: 260px;">
+                        <span class="ico">
+                            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="7"/>
+                                <path d="m21 21-4.3-4.3"/>
+                            </svg>
+                        </span>
+                        <input id="tableSearch" name="cari" class="input" type="text" placeholder="Cari nama atau kategori..." value="{{ $cari ?? '' }}" style="padding-top: 6px; padding-bottom: 6px; font-size: 13px;">
+                    </div>
+                </form>
+                <span class="badge primary" id="barangCountBadge">{{ count($barangs) }} BARANG</span>
+            </div>
         </div>
         <div class="table-scroll">
             <table class="table">
@@ -63,7 +76,7 @@
                     <tr>
                         <td class="cell-name">{{ $barang->nama }}</td>
                         <td style="text-align:center">
-                            @if($barang->nama_kategori)
+                            @if(!empty($barang->nama_kategori))
                                 <span class="badge info">{{ $barang->nama_kategori }}</span>
                             @else
                                 <span class="badge" style="background: rgba(100, 116, 139, 0.15); color: #94a3b8;">Tanpa Kategori</span>
@@ -104,4 +117,49 @@
         </div>
     </section>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('tableSearch');
+    const countBadge = document.getElementById('barangCountBadge');
+    const tbody = document.querySelector('.table tbody');
+    if (!searchInput || !tbody) return;
+
+    searchInput.addEventListener('input', function() {
+        const term = searchInput.value.toLowerCase().trim();
+        const rows = tbody.querySelectorAll('tr');
+        let visibleCount = 0;
+
+        rows.forEach(row => {
+            if (row.id === 'noMatchRow' || row.querySelector('td[colspan]')) return;
+            const text = row.textContent.toLowerCase();
+            if (text.includes(term)) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        let noMatch = document.getElementById('noMatchRow');
+        if (visibleCount === 0 && rows.length > 0) {
+            if (!noMatch) {
+                noMatch = document.createElement('tr');
+                noMatch.id = 'noMatchRow';
+                noMatch.innerHTML = `<td colspan="{{ Auth::user()->isAdmin() ? 5 : 4 }}" style="text-align:center; padding: 24px; color: var(--t-muted);">Tidak ada barang yang cocok dengan pencarian "${term}".</td>`;
+                tbody.appendChild(noMatch);
+            } else {
+                noMatch.style.display = '';
+                noMatch.querySelector('td').innerText = `Tidak ada barang yang cocok dengan pencarian "${term}".`;
+            }
+        } else if (noMatch) {
+            noMatch.style.display = 'none';
+        }
+
+        if (countBadge) {
+            countBadge.innerText = `${visibleCount} BARANG`;
+        }
+    });
+});
+</script>
 @endsection
