@@ -18,7 +18,7 @@ class KategoriController extends Controller
                   ->orWhere('deskripsi', 'like', "%{$cari}%");
         }
 
-        $kategoris = $query->orderBy('id', 'desc')->get();
+        $kategoris = $query->orderBy('id', 'asc')->get();
         return view('kategori.daftar', ['kategoris' => $kategoris, 'cari' => $cari]);
     }
 

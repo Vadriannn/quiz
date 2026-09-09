@@ -14,7 +14,7 @@ class BarangController extends Controller
         $query = DB::table('barangs')
             ->leftJoin('kategoris', 'barangs.kategori_id', '=', 'kategoris.id')
             ->select('barangs.*', 'kategoris.nama as nama_kategori')
-            ->orderBy('barangs.id', 'desc');
+            ->orderBy('barangs.id', 'asc');
 
         if ($cari) {
             $query->where(function ($q) use ($cari) {
@@ -30,7 +30,7 @@ class BarangController extends Controller
 
     public function create()
     {
-        $kategoris = DB::table('kategoris')->get();
+        $kategoris = DB::table('kategoris')->orderBy('id', 'asc')->get();
         
         return view('barang.create', ['kategoris' => $kategoris]);
     }
@@ -66,7 +66,7 @@ class BarangController extends Controller
     public function ubah($id)
     {
         $barang = DB::table('barangs')->where('id', $id)->first();
-        $kategoris = DB::table('kategoris')->get();
+        $kategoris = DB::table('kategoris')->orderBy('id', 'asc')->get();
         return view('barang.ubah', ['barang' => $barang, 'kategoris' => $kategoris]);
     }
 
