@@ -44,8 +44,15 @@ class KategoriController extends Controller
     }
 
     public function hapus(Kategori $kategori) {
-        $kategori->delete();
-        return redirect('/daftar-kategori');
+        try {
+            $kategori->delete();
+            return redirect('/daftar-kategori')->with('success', 'Data kategori berhasil dihapus.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->getCode() == 23000) {
+                return redirect('/daftar-kategori')->with('error', 'Kategori ini tidak dapat dihapus karena masih digunakan sebagai data induk (parent) oleh data barang.');
+            }
+            return redirect('/daftar-kategori')->with('error', 'Gagal menghapus kategori: ' . $e->getMessage());
+        }
     }
 
     public function ubah(Kategori $kategori) {

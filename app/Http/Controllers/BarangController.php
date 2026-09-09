@@ -51,8 +51,16 @@ class BarangController extends Controller
 
     public function hapus($id)
     {
-        DB::table('barangs')->where('id', $id)->delete();
-        return redirect('/daftar-barang');
+        try {
+            DB::table('barangs')->where('id', $id)->delete();
+            return redirect('/daftar-barang')->with('success', 'Data barang berhasil dihapus.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            // Error code 23000 / MySQL 1451: foreign key constraint fails
+            if ($e->getCode() == 23000) {
+                return redirect('/daftar-barang')->with('error', 'Barang ini tidak dapat dihapus karena masih digunakan sebagai data induk (parent) pada transaksi detail nota.');
+            }
+            return redirect('/daftar-barang')->with('error', 'Gagal menghapus barang: ' . $e->getMessage());
+        }
     }
 
     public function ubah($id)
