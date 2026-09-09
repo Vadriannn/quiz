@@ -3,37 +3,15 @@
     [1],
     {
         939(e, t, a) {
-            const n = [
-                {
-                    label: "Dashboard",
-                    items: [
-                        {
-                            key: "dashboard",
-                            text: "Dashboard",
-                            href: "index.html",
-                            icon: '<path d="M3 12 12 3l9 9"/><path d="M5 10v10h14V10"/>',
-                        }
-                    ],
-                },
-                {
-                    label: "Data Master",
-                    items: [
-                        {
-                            key: "barang",
-                            text: "Barang",
-                            href: "/daftar-barang",
-                            icon: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
-                        },
-                        {
-                            key: "kategori",
-                            text: "Kategori",
-                            href: "/daftar-kategori",
-                            icon: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4z"/>',
-                        },
-                    ],
-                },
-            ];
             function o(e) {
+                const b = document.body,
+                    userName = b.getAttribute("data-user-name") || "Admin",
+                    userRole = b.getAttribute("data-user-role") || "Admin",
+                    userEmail = b.getAttribute("data-user-email") || "",
+                    logoutUrl = b.getAttribute("data-logout-url") || "/logout",
+                    csrfToken = b.getAttribute("data-csrf") || "",
+                    initials = userName.trim().split(/\s+/).map((w) => w[0]).join("").toUpperCase().slice(0, 2) || "U";
+
                 return `\n    <header class="d-topbar">\n      <div class="crumbs">\n        <button class="hamburger" data-drawer-open aria-label="Open navigation">\n          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>\n        </button>\n        ${(function (
                     e,
                 ) {
@@ -50,15 +28,65 @@
                         .join("");
                 })(
                     e,
-                )}\n      </div>\n      <div class="topbar-actions">\n        <button class="cmd" data-palette-open>\n          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>\n          <span>Search...</span>\n          <kbd class="kbd">⌘K</kbd>\n        </button>\n\n        <div class="dd-wrap">\n          <button class="icon-btn" data-dropdown aria-label="Notifications">\n            <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>\n            <span class="count danger">3</span>\n          </button>\n          <div class="dd-menu" role="menu">\n            <div class="dd-head">\n              <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>\n              Notifications\n            </div>\n            <div class="dd-list">\n              <a class="dd-item" href="#">\n                <div class="dd-avatar a1">JD</div>\n                <div class="dd-body">\n                  <div class="dd-text"><strong>John Doe</strong> liked your <em>post</em></div>\n                  <div class="dd-time">5 MIN AGO</div>\n                </div>\n              </a>\n              <a class="dd-item" href="#">\n                <div class="dd-avatar a2">MD</div>\n                <div class="dd-body">\n                  <div class="dd-text"><strong>Moo Doe</strong> liked your <em>cover image</em></div>\n                  <div class="dd-time">7 MIN AGO</div>\n                </div>\n              </a>\n              <a class="dd-item" href="#">\n                <div class="dd-avatar a3">LD</div>\n                <div class="dd-body">\n                  <div class="dd-text"><strong>Lee Doe</strong> commented on your <em>video</em></div>\n                  <div class="dd-time">10 MIN AGO</div>\n                </div>\n              </a>\n            </div>\n            <a class="dd-footer" href="#">View all notifications →</a>\n          </div>\n        </div>\n\n        <div class="dd-wrap">\n          <button class="icon-btn" data-dropdown aria-label="Messages">\n            <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>\n            <span class="count info">3</span>\n          </button>\n          <div class="dd-menu" role="menu">\n            <div class="dd-head">\n              <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>\n              Messages\n            </div>\n            <div class="dd-list">\n              <a class="dd-item" href="#">\n                <div class="dd-avatar a1">JD</div>\n                <div class="dd-body">\n                  <div class="dd-row-head"><strong>John Doe</strong><span class="dd-time">5 MIN</span></div>\n                  <div class="dd-preview">Want to create your own customized data generator for your app…</div>\n                </div>\n              </a>\n              <a class="dd-item" href="#">\n                <div class="dd-avatar a2">MD</div>\n                <div class="dd-body">\n                  <div class="dd-row-head"><strong>Moo Doe</strong><span class="dd-time">15 MIN</span></div>\n                  <div class="dd-preview">Want to create your own customized data generator for your app…</div>\n                </div>\n              </a>\n              <a class="dd-item" href="#">\n                <div class="dd-avatar a3">LD</div>\n                <div class="dd-body">\n                  <div class="dd-row-head"><strong>Lee Doe</strong><span class="dd-time">25 MIN</span></div>\n                  <div class="dd-preview">Want to create your own customized data generator for your app…</div>\n                </div>\n              </a>\n            </div>\n            <a class="dd-footer" href="#">View all messages →</a>\n          </div>\n        </div>\n\n        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"></button>\n\n        <div class="dd-wrap">\n          <div class="avatar" data-dropdown tabindex="0" role="button" aria-label="Account menu">JD</div>\n          <div class="dd-menu dd-profile" role="menu">\n            <div class="dd-profile-head">\n              <div class="dd-profile-name">John Doe</div>\n              <div class="dd-profile-email">john@adminator.app</div>\n            </div>\n            <a class="dd-menu-item" href="#">\n              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>\n              Settings\n            </a>\n            <a class="dd-menu-item" href="#">\n              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>\n              Profile\n            </a>\n            <a class="dd-menu-item" href="email.html">\n              <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>\n              Messages\n            </a>\n            <div class="dd-divider"></div>\n            <a class="dd-menu-item danger" href="#">\n              <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>\n              Logout\n            </a>\n          </div>\n        </div>\n      </div>\n    </header>`;
+                )}\n      </div>\n      <div class="topbar-actions">\n        <button class="cmd" data-palette-open>\n          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>\n          <span>Search...</span>\n          <kbd class="kbd">⌘K</kbd>\n        </button>\n\n        <div class="dd-wrap">\n          <button class="icon-btn" data-dropdown aria-label="Notifications">\n            <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>\n            <span class="count danger">3</span>\n          </button>\n          <div class="dd-menu" role="menu">\n            <div class="dd-head">\n              <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>\n              Notifications\n            </div>\n            <div class="dd-list">\n              <a class="dd-item" href="#">\n                <div class="dd-avatar a1">JD</div>\n                <div class="dd-body">\n                  <div class="dd-text"><strong>Sistem</strong> inventaris siap digunakan</div>\n                  <div class="dd-time">BARU SAJA</div>\n                </div>\n              </a>\n            </div>\n            <a class="dd-footer" href="#">View all notifications →</a>\n          </div>\n        </div>\n\n        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"></button>\n\n        <div class="dd-wrap">\n          <div class="avatar" data-dropdown tabindex="0" role="button" aria-label="Account menu">${initials}</div>\n          <div class="dd-menu dd-profile" role="menu">\n            <div class="dd-profile-head">\n              <div class="dd-profile-name">${userName}</div>\n              <div class="dd-profile-email">${userEmail || userRole}</div>\n            </div>\n            <div class="dd-divider"></div>\n            <form id="topbar-logout-form" action="${logoutUrl}" method="POST" style="display:none">\n              <input type="hidden" name="_token" value="${csrfToken}">\n            </form>\n            <a class="dd-menu-item danger" href="${logoutUrl}" onclick="event.preventDefault(); document.getElementById('topbar-logout-form').submit();">\n              <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>\n              Logout\n            </a>\n          </div>\n        </div>\n      </div>\n    </header>`;
             }
             function s() {
                 const e = document.body,
                     t = e.getAttribute("data-active") || "",
                     a = e.getAttribute("data-crumbs") || "",
+                    userName = e.getAttribute("data-user-name") || "Admin",
+                    userRole = e.getAttribute("data-user-role") || "Admin",
+                    userRoleRaw = (e.getAttribute("data-user-role-raw") || "").toLowerCase(),
+                    userEmail = e.getAttribute("data-user-email") || "",
+                    logoutUrl = e.getAttribute("data-logout-url") || "/logout",
+                    csrfToken = e.getAttribute("data-csrf") || "",
+                    initials = userName.trim().split(/\s+/).map((w) => w[0]).join("").toUpperCase().slice(0, 2) || "U",
                     s = document.querySelector("[data-shell-sidebar]"),
                     r = document.querySelector("[data-shell-topbar]"),
                     i = document.querySelector("[data-shell-footer]");
+
+                const isAdmin = userRoleRaw === "admin";
+                const n = [
+                    {
+                        label: "Dashboard",
+                        items: [
+                            {
+                                key: "dashboard",
+                                text: "Dashboard",
+                                href: "/",
+                                icon: '<path d="M3 12 12 3l9 9"/><path d="M5 10v10h14V10"/>',
+                            }
+                        ],
+                    },
+                    isAdmin ? {
+                        label: "Data Master",
+                        items: [
+                            {
+                                key: "barang",
+                                text: "Barang",
+                                href: "/daftar-barang",
+                                icon: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+                            },
+                            {
+                                key: "kategori",
+                                text: "Kategori",
+                                href: "/daftar-kategori",
+                                icon: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4z"/>',
+                            },
+                        ],
+                    } : {
+                        label: "Katalog Inventaris",
+                        items: [
+                            {
+                                key: "barang",
+                                text: "Daftar Barang & Kategori",
+                                href: "/daftar-barang",
+                                icon: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+                            },
+                        ],
+                    },
+                ];
+
                 (s &&
                     (s.outerHTML = (function (e) {
                         const t = n
@@ -98,12 +126,12 @@
                                 })(t, e),
                             )
                             .join("");
-                        return `\n    <aside class="d-sidebar">\n      <div class="brand">\n        <div class="brand-logo"><svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">\n  <path fill="#ffffff" d="M14.747 9.125c.527-1.426 1.736-2.573 3.317-2.573c1.643 0 2.792 1.085 3.318 2.573l6.077 16.867c.186.496.248.931.248 1.147c0 1.209-.992 2.046-2.139 2.046c-1.303 0-1.954-.682-2.264-1.611l-.931-2.915h-8.62l-.93 2.884c-.31.961-.961 1.642-2.232 1.642c-1.24 0-2.294-.93-2.294-2.17c0-.496.155-.868.217-1.023l6.233-16.867zm.34 11.256h5.891l-2.883-8.992h-.062l-2.946 8.992z"/>\n</svg></div>\n        <div class="brand-text">\n          <div class="brand-name">Adminator</div>\n          <div class="brand-tag">v4.1.2 · preview</div>\n        </div>\n      </div>\n      ${t}\n      <div class="sidebar-footer">\n        <div class="workspace">\n          <div class="workspace-avatar">JD</div>\n          <div class="workspace-text">\n            <div class="workspace-name">John Doe</div>\n            <div class="workspace-role">admin</div>\n          </div>\n          <svg class="workspace-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">\n            <path d="m7 9 5-5 5 5"/><path d="m7 15 5 5 5-5"/>\n          </svg>\n        </div>\n      </div>\n    </aside>`;
+                        return `\n    <aside class="d-sidebar">\n      <div class="brand">\n        <div class="brand-logo"><svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">\n  <path fill="#ffffff" d="M14.747 9.125c.527-1.426 1.736-2.573 3.317-2.573c1.643 0 2.792 1.085 3.318 2.573l6.077 16.867c.186.496.248.931.248 1.147c0 1.209-.992 2.046-2.139 2.046c-1.303 0-1.954-.682-2.264-1.611l-.931-2.915h-8.62l-.93 2.884c-.31.961-.961 1.642-2.232 1.642c-1.24 0-2.294-.93-2.294-2.17c0-.496.155-.868.217-1.023l6.233-16.867zm.34 11.256h5.891l-2.883-8.992h-.062l-2.946 8.992z"/>\n</svg></div>\n        <div class="brand-text">\n          <div class="brand-name">KnowHub</div>\n          <div class="brand-tag">v4.1.2 · 2026</div>\n        </div>\n      </div>\n      ${t}\n      <div class="sidebar-footer">\n        <div class="workspace">\n          <div class="workspace-avatar">${initials}</div>\n          <div class="workspace-text">\n            <div class="workspace-name">${userName}</div>\n            <div class="workspace-role">${userRole}</div>\n          </div>\n          <svg class="workspace-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">\n            <path d="m7 9 5-5 5 5"/><path d="m7 15 5 5 5-5"/>\n          </svg>\n        </div>\n      </div>\n    </aside>`;
                     })(t)),
                     r && (r.outerHTML = o(a)),
                     i &&
                     (i.outerHTML =
-                        '\n    <footer class="d-footer">\n      <div>© 2026 · Designed by <a href="https://colorlib.com" target="_blank" rel="nofollow noopener noreferrer">Colorlib</a></div>\n      <div class="d-footer-meta">\n        <span>v4.1.2</span>\n        <span>preview build</span>\n      </div>\n    </footer>'));
+                        '\n    <footer class="d-footer">\n      <div>© 2026 · Designed by Vadrian</div>\n      <div class="d-footer-meta">\n        <span>v4.1.2</span>\n        <span>production build</span>\n      </div>\n    </footer>'));
             }
             function r() {
                 const e = document.body;

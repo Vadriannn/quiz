@@ -33,18 +33,18 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Nama Kategori</th>
-                        <th>Deskripsi</th>
-                        <th style="text-align:right">Aksi</th>
+                        <th style = "text-align:center">Nama Kategori</th>
+                        <th style = "text-align:center">Deskripsi</th>
+                        <th style="text-align:center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($kategoris as $kategori) 
                     <tr>
                         <td class="cell-name">{{ $kategori->nama }}</td>
-                        <td>{{ $kategori->deskripsi ?: '-' }}</td>
-                        <td style="text-align:right;">
-                            <div style="display:flex; gap:10px; justify-content:flex-end;">
+                        <td style = "text-align:center">{{ $kategori->deskripsi ?: '-' }}</td>
+                        <td style="text-align:center;">
+                            <div style="display:flex; gap:10px; justify-content:center;">
                                 <a href="{{ route('kategori.ubah', $kategori) }}" class="badge solid" style="text-decoration:none;">Ubah</a>
                                 <form method="POST" action="{{ route('kategori.hapus', $kategori) }}" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');" style="margin:0;">
                                     @csrf

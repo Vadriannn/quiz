@@ -30,7 +30,16 @@
         <script defer="defer" src="{{ asset('adminator/2026.js') }}"></script>
         <link href="{{ asset('adminator/style.css') }}" rel="stylesheet" />
     </head>
-    <body data-active="@yield('active_page', 'dashboard')" data-crumbs="@yield('breadcrumbs', 'Workspace | Dashboard')">
+    <body 
+        data-active="@yield('active_page', 'dashboard')" 
+        data-crumbs="@yield('breadcrumbs', 'Workspace | Dashboard')"
+        data-user-name="{{ Auth::check() ? Auth::user()->nama : 'Guest' }}"
+        data-user-role="{{ Auth::check() ? (Auth::user()->isAdmin() ? 'Admin' : 'User Biasa') : 'Guest' }}"
+        data-user-role-raw="{{ Auth::check() ? strtolower(Auth::user()->Role) : 'guest' }}"
+        data-user-email="{{ Auth::check() ? Auth::user()->email : '' }}"
+        data-logout-url="{{ route('logout') }}"
+        data-csrf="{{ csrf_token() }}"
+    >
         <div class="shell">
             <div data-shell-sidebar></div>
             <div class="main">

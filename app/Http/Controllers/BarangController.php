@@ -9,7 +9,12 @@ class BarangController extends Controller
 {
     public function tampil()
     {
-        $barangs = DB::table('barangs')->get();
+        $barangs = DB::table('barangs')
+            ->leftJoin('kategoris', 'barangs.kategori_id', '=', 'kategoris.id')
+            ->select('barangs.*', 'kategoris.nama as nama_kategori')
+            ->orderBy('barangs.id', 'desc')
+            ->get();
+
         return view('barang.daftar', ['barangs' => $barangs]);
     }
 

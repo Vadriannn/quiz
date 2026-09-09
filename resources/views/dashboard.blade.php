@@ -11,7 +11,7 @@
                                 >Thursday · April 23 · 2026</span
                             >
                             <h1 class="hero-title">
-                                Welcome back, <span class="accent">John</span>
+                                Welcome back, <span class="accent">{{ Auth::check() ? Auth::user()->nama : 'Pengguna' }}</span>
                             </h1>
                             <p class="hero-sub">
                                 Total visits are <strong>+10%</strong> week over
